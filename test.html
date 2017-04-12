@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<head>
+    <h1 style= "text-align:center;"><img src="aceOfSpades.png" ></h1>
+</head>
+
+<div id="myDropdown" class="dropdown-content">
+    <a href="home.html">Home</a>
+    <a href="test.html">Unit Tests</a>
+</div>
+    <br>
+    <br>
+<div>
+    <font face="Comic sans MS" size="4">Press the button to run the Tests</font>
+    <br>
+    <br>
+    <button onclick="gooo()">Go!</button>
+</div>
+    <br>
+    <br>    
+<div>
+    <p id="demo"></p>
+</div>
+
+<style>
+    img {
+        width: 20%;
+        height: 20%;
+    }
+    div {
+        text-align:center;
+    }
+    button {
+        height:50%;
+        font-size:14pt;
+    }
+    .dropdown-content a {
+        font-family: "Comic sans MS";
+        color: black;
+        font-size: 175%;
+        padding: 12px 16px;
+        text-decoration: none;
+    }
+    table, th, td {
+        border: 1px solid black;
+        width: 50%;
+    }
+    table.center {
+        margin-left:auto; 
+        margin-right:auto;
+    }
+</style>
+    
+<script type="text/javascript" src="main.js"></script>
+    
+<script type="text/javascript">
+    //PokerHand instances for testing
+    rf = ["AD","KD","QD","JD","TD"];
+    royal_flush = new PokerHand(rf);
+    sf = ["9S","6S","7S","8S","TS"];
+    straight_flush = new PokerHand(sf);
+    sf2 = ["9C","6C","7C","8C","TC"];
+    straight_flush2 = new PokerHand(sf2);
+    f = ["QS","QC","QD","QH","3S"];
+    four = new PokerHand(f);
+    fh = ["JH","JS","JD","AS","AC"]; 
+    full_house = new PokerHand(fh);
+    fh2 = ["QH","QS","QC","3D","3C"];
+    full_house2 = new PokerHand(fh2);
+    fl = ["5C","AC","4C","8C","TC"];
+    flush = new PokerHand(fl);
+    s = ["8C","9S","TD","JS","QH"];
+    straight = new PokerHand(s);
+    t = ["4S","4H","4C","JD","AD"];
+    three = new PokerHand(t);
+    tw = ["QS","QH","5C","5S","JC"];
+    two = new PokerHand(tw);
+    tw2 = ["QC","QD","5D","5H","2S"];
+    two2 = new PokerHand(tw2);
+    o = ["KD","KH","2H","8S","9C"];
+    one = new PokerHand(o);
+    o2 = ["KC","KS","2C","8H","9H"];
+    oxygen = new PokerHand(o2);
+    o3 = ["KC","KS","2C","TH","9H"];
+    ozone =  new PokerHand(o3);
+    hc = ["QC","JD","3H","8C","9S"];
+    high_card = new PokerHand(hc);
+    hc2 = ["QD","JS","3C","8S","TH"];
+    high_card2 = new PokerHand(hc2);
+    
+    //TESTING
+    function gooo() {
+        var table = "<table class=\"center\" cellpadding=\"50\" cellspacing=\"0\"><tbody><tr>";
+        
+        table += "<td>Hand One</td>";
+        table += "<td>Hand Two</td>";
+        table += "<td>Result</td>";
+        table += "<td>Algo Result</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + rf.join(" ") + "<pre> Royal Flush" + "</td>";
+        table += "<td>" + sf.join(" ") + "<pre> Straight Flush" + "</td>";
+        table += "<td>1</td>";
+        table += "<td>" + royal_flush.compareWith(straight_flush) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + sf.join(" ") + "<pre> Straight Flush" + "</td>";
+        table += "<td>" + sf2.join(" ") + "<pre> Straight Flush" + "</td>";
+        table += "<td>3</td>";
+        table += "<td>" + straight_flush.compareWith(straight_flush2) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + fl.join(" ") + "<pre> Flush" + "</td>";
+        table += "<td>" + rf.join(" ") + "<pre> Royal Flush" + "</td>";
+        table += "<td>2</td>";
+        table += "<td>" + flush.compareWith(royal_flush) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + tw.join(" ") + "<pre> Two Pairs " + "</td>";
+        table += "<td>" + tw2.join(" ") + "<pre> Two Pairs " + "</td>";
+        table += "<td>1</td>";
+        table += "<td>" + two.compareWith(two2) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + tw.join(" ") + "<pre> Two Pairs " + "</td>";
+        table += "<td>" + t.join(" ") + "<pre> Three of A Kind " + "</td>";
+        table += "<td>2</td>";
+        table += "<td>" + two2.compareWith(three) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + fl.join(" ") + "<pre> Flush " + "</td>";
+        table += "<td>" + o.join(" ") + "<pre> One Pair " + "</td>";
+        table += "<td>1</td>";
+        table += "<td>" + flush.compareWith(one) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + s.join(" ") + "<pre> Straight " + "</td>";
+        table += "<td>" + hc.join(" ") + "<pre> High Card " + "</td>";
+        table += "<td>1</td>";
+        table += "<td>" + straight.compareWith(high_card) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + hc.join(" ") + "<pre> High Card " + "</td>";
+        table += "<td>" + hc2.join(" ") + "<pre> High Card " + "</td>";
+        table += "<td>2</td>";
+        table += "<td>" + high_card.compareWith(high_card2) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + fh.join(" ") + "<pre> Full House " + "</td>";
+        table += "<td>" + fh2.join(" ") + "<pre> Full House " + "</td>";
+        table += "<td>2</td>";
+        table += "<td>" + full_house.compareWith(full_house2) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + f.join(" ") + "<pre> Four of a Kind " + "</td>";
+        table += "<td>" + fh.join(" ") + "<pre> Full House " + "</td>";
+        table += "<td>1</td>";
+        table += "<td>" + four.compareWith(full_house) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + tw.join(" ") + "<pre> Two Pairs " + "</td>";
+        table += "<td>" + o.join(" ") + "<pre> One Pair " + "</td>";
+        table += "<td>1</td>";
+        table += "<td>" + two.compareWith(one) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + o.join(" ") + "<pre> One Pair " + "</td>";
+        table += "<td>" + o2.join(" ") + "<pre> One Pair " + "</td>";
+        table += "<td>3</td>";
+        table += "<td>" + one.compareWith(oxygen) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + t.join(" ") + "<pre> Three of a Kind " + "</td>";
+        table += "<td>" + s.join(" ") + "<pre> Straight " + "</td>";
+        table += "<td>2</td>";
+        table += "<td>" + three.compareWith(straight) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + fl.join(" ") + "<pre> Flush " + "</td>";
+        table += "<td>" + f.join(" ") + "<pre> Four of a Kind " + "</td>";
+        table += "<td>2</td>";
+        table += "<td>" + flush.compareWith(four) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + o3.join(" ") + "<pre> One Pair " + "</td>";
+        table += "<td>" + o.join(" ") + "<pre>  One Pair " + "</td>";
+        table += "<td>1</td>";
+        table += "<td>" + ozone.compareWith(one) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "<td>" + o.join(" ") + "<pre> One Pair " + "</td>";
+        table += "<td>" + o3.join(" ") + "<pre>  One Pair " + "</td>";
+        table += "<td>2</td>";
+        table += "<td>" + one.compareWith(ozone) + "</td>";
+        table += "</tr><tr>";
+        
+        table += "</tr></tbody></table>";
+        document.getElementById("demo").innerHTML = table;
+    }
+    
+    
+</script>
+
+</body>
+</html>

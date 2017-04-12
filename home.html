@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<head>
+    <h1 style= "text-align:center;"><img src="aceOfSpades.png" ></h1>
+</head>
+
+<div id="myDropdown" class="dropdown-content">
+    <a href="home.html">Home</a>
+    <a href="test.html">Unit Tests</a>
+</div>
+    <br>
+    <br>
+<div>
+    <font face="Comic sans MS" size="4">Input two Poker Hands</font>
+    <br>
+    <font face="Comic sans MS" size="3">* A space is used as card seperator<br>* Each card consists of two characters<br>* The first character is the value of the card, valid characters are: `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `T`(en), `J`(ack), `Q`(ueen), `K`(ing), `A`(ce)<br>* The second character represents the suit, valid characters are: `S`(pades), `H`(earts), `D`(iamonds), `C`(lubs)<br>* An Input Example is "KS 2H 5C JD TD"<br>* Input is case sensitive
+    </font>
+</div>
+    <br> 
+<div>
+    <font face="Comic sans MS" size="2">Hand One</font>
+    <br>
+    <input type="text" id="hand1"=>
+    <br>
+    <br>
+    <font face="Comic sans MS" size="2">Hand Two</font>
+    <br>
+    <input type="text" id="hand2"=>
+    <br>
+    <br>
+    <button onclick="check()">Check</button>
+</div>
+
+<div>
+    <font face="Comic sans MS" size="4"><p id="demo"></p></font>
+</div>
+<p id="demo"></p>
+
+    
+<style>
+    img {
+        width: 20%;
+        height: 20%;
+    }
+    div {
+        text-align:center;
+    }
+    button {
+        height:50%;
+        font-size:14pt;
+    }
+    input {
+        height:50%;
+        font-size:14pt;
+    }
+    .dropdown-content a {
+        font-family: "Comic sans MS";
+        color: black;
+        font-size: 175%;
+        padding: 12px 16px;
+        text-decoration: none;
+    }
+</style>
+    
+    
+<script type="text/javascript" src="main.js"></script>
+    
+<script type="text/javascript">    
+    function check()
+        {
+            var hand1 = document.getElementById("hand1").value;
+            var hand1 = hand1.split(" ");
+            
+            var hand2 = document.getElementById("hand2").value;
+            var hand2 = hand2.split(" ");
+            
+            var hands = hand1.concat(hand2);
+            
+            var hands_set = hands.filter(function(elem, index, self) {return index == self.indexOf(elem);})
+            
+            var the_switch = 0;
+            
+            //Check if Input is Valid
+            if (hand1.length != 5 || hand2.length != 5 || hands_set.length != 10){
+                the_switch = 1;
+                document.getElementById("demo").innerHTML = "Your Input is Invalid";
+            }else{
+                for (var i=0; i<10; i++){
+                    if ((/^[2-9]|A|K|Q|J|T/.test(hands[i].charAt(0)))&& hands[i].length == 2 && (/^S|H|D|C/.test(hands[i].charAt(1)))){
+                        continue;
+                    }
+                    else{
+                        document.getElementById("demo").innerHTML = "Your Input is Invalid";
+                        the_switch = 1;
+                    }
+                }
+            }
+            //If Input Valid, proceed and execute comparison algorithm, return result
+            if (the_switch == 0) {
+                var hand_o1 = new PokerHand(hand1);
+                var hand_o2 = new PokerHand(hand2);
+                var win = hand_o1.compareWith(hand_o2);
+                if (win == 1) {
+                    document.getElementById("demo").innerHTML = "Hand One Wins";
+                }
+                else if (win==2){
+                    document.getElementById("demo").innerHTML = "Hand Two Wins";
+                }
+                else {
+                    document.getElementById("demo").innerHTML = "It's A Tie";
+                }
+            }
+        }
+</script>
+
+</body>
+</html>
